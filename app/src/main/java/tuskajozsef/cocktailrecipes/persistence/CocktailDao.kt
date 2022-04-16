@@ -6,14 +6,14 @@ import androidx.room.*;
 @Dao
 interface CocktailDao {
     @Query("SELECT * FROM cocktails")
-    fun getAllCities(): List<Cocktail>
+    fun getAllCocktails(): List<Cocktail>
 
     @Insert
-    fun insertCity(cocktail: Cocktail) : Long
+    fun insertCocktail(cocktail: Cocktail) : Long
 
     @Delete
-    fun deleteCity(cocktail: Cocktail)
+    fun deleteCocktail(cocktail: Cocktail)
 
     @Update
-    fun updateCity(cocktail: Cocktail)
+    fun updateCocktail(cocktail: Cocktail)
 }

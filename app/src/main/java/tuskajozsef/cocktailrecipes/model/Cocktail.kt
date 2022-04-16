@@ -1,4 +1,11 @@
 package tuskajozsef.cocktailrecipes.model
 
-data class Cocktail(val name: String, val ingredients: ArrayList<Ingredient>, val image: String)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "cocktails")
+data class Cocktail(
+    @PrimaryKey(autoGenerate = true) var Id : Long?,
+    var name: String,
+    var image: String)
 
