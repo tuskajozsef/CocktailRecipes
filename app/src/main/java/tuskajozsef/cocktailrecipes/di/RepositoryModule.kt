@@ -7,6 +7,7 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import tuskajozsef.cocktailrecipes.network.CocktailService
 import tuskajozsef.cocktailrecipes.persistence.CocktailDao
+import tuskajozsef.cocktailrecipes.ui.details.DetailRepository
 import tuskajozsef.cocktailrecipes.ui.main.MainRepository
 
 @Module
@@ -24,10 +25,7 @@ object RepositoryModule {
 
     @Provides
     @ViewModelScoped
-    fun provideDetailsRepository(
-        cocktailService: CocktailService,
-        cocktailDao: CocktailDao
-    ): MainRepository {
-        return MainRepository(cocktailService, cocktailDao)
+    fun provideDetailsRepository(cocktailDao: CocktailDao): DetailRepository {
+        return DetailRepository(cocktailDao)
     }
 }
