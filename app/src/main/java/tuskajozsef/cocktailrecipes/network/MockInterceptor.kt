@@ -7,7 +7,7 @@ class MockInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         if (BuildConfig.DEBUG) {
-            val uri = chain.request().url().uri().toString()
+            val uri = chain.request().url.toUri().toString()
             val responseString = mockResponse
 
             return chain.proceed(chain.request())
@@ -15,10 +15,10 @@ class MockInterceptor : Interceptor {
                 .code(200)
                 .protocol(Protocol.HTTP_2)
                 .message(responseString)
-                .body(
+                /*.body(
                     ResponseBody.create(
                         MediaType.parse("application/json"),
-                    responseString.toByteArray()))
+                    responseString.toByteArray()))*/
                 .addHeader("content-type", "application/json")
                 .build()
         } else {

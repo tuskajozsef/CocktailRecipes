@@ -1,6 +1,7 @@
 package tuskajozsef.cocktailrecipes.di
 
 import android.content.Context
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,10 +42,10 @@ object NetworkModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(
-                "www.thecocktaildb.com/"
+                "https://www.thecocktaildb.com/"
             )
             .addConverterFactory(GsonConverterFactory.create())
-            //.addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .build()
     }
 

@@ -3,15 +3,12 @@ package tuskajozsef.cocktailrecipes.ui.main
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import tuskajozsef.cocktailrecipes.model.Cocktail
-import tuskajozsef.cocktailrecipes.model.CocktailResponse
 import tuskajozsef.cocktailrecipes.network.CocktailService
 import tuskajozsef.cocktailrecipes.persistence.CocktailDao
 import javax.inject.Inject
+import com.skydoves.sandwich.suspendOnSuccess
+import kotlinx.coroutines.flow.flowOn
 
 class MainRepository @Inject constructor(
     private val cocktailService: CocktailService,
@@ -23,22 +20,13 @@ class MainRepository @Inject constructor(
         if (cocktails.isEmpty()) {
             //since a full list can only be requested by paid subscription, I request 10 random and put it in to a list
             for (i in 1..10) {
-                cocktailService.getRandomCocktail().enqueue(object : Callback<CocktailResponse> {
-                    override fun onFailure(call: Call<CocktailResponse>, t: Throwable) {
-                        print(t.message!!)
-                    }
-
-                    override fun onResponse(
-                        call: Call<CocktailResponse>,
-                        response: Response<CocktailResponse>
-                    ) {
-                        val cocktailsResponse = response.body()
-                        val cocktail = cocktailsResponse!!.drinks[0];
-                        cocktails.add(cocktail)
-                        cocktailDao.insertCocktail(cocktail)
-                    }
-                })
+                cocktailService.getRandomCocktail().suspendOnSuccess {
+                    cocktailDao.insertCocktail(data.drinks[0])
+                    cocktails.add(data.drinks[0]);
+                }
             }
+            emit(cocktails)
+        } else {
             emit(cocktails)
         }
     }.flowOn(Dispatchers.IO)
