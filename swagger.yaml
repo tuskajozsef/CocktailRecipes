@@ -1,0 +1,205 @@
+swagger: "2.0"
+info:
+  description: "The Free CocktailDB Swagger API"
+  version: "1.0.0"
+  title: "CocktailDB"
+host: "thecocktaildb.com"
+basePath: "/api/json/v1/1"
+schemes:
+  - "https"
+paths:
+  /search.php:
+    get:
+      summary: "Finds cocktail by name"
+      operationId: "search.php"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "s"
+          in: "query"
+          description: "Name of the cocktail"
+          required: true
+          type: "string"
+          default: "margarita"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/drinks"
+        "400":
+          description: "Invalid cocktail name"
+  /filter.php:
+    get:
+      summary: "Finds cocktails by ingredient"
+      operationId: "filter.php"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "i"
+          in: "query"
+          description: "Name of the ingredient"
+          required: true
+          type: "string"
+          default: "vodka"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/drinks"
+        "400":
+          description: "Invalid ingredient name"
+  /random.php:
+    get:
+      summary: "Gets a random cocktail"
+      description: "It is used to create a list of cocktails in a loop"
+      operationId: "random.php"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/drinks"
+definitions:
+  drinks:
+    type: array
+    items:
+      type: object
+      properties:
+        idDrink:
+          type: string
+        strDrink:
+          type: string
+        strDrinkAlternate:
+          type: string
+          format: nullable
+        strTags:
+          type: string
+        strVideo:
+          type: string
+          format: nullable
+        strCategory:
+          type: string
+        strIBA:
+          type: string
+        strAlcoholic:
+          type: string
+        strGlass:
+          type: string
+        strInstructions:
+          type: string
+        strInstructionsES:
+          type: string
+          format: nullable
+        strInstructionsDE:
+          type: string
+        strInstructionsFR:
+          type: string
+          format: nullable
+        strInstructionsIT:
+          type: string
+        strInstructionsZH-HANS:
+          type: string
+          format: nullable
+        strInstructionsZH-HANT:
+          type: string
+          format: nullable
+        strDrinkThumb:
+          type: string
+        strIngredient1:
+          type: string
+        strIngredient2:
+          type: string
+        strIngredient3:
+          type: string
+        strIngredient4:
+          type: string
+        strIngredient5:
+          type: string
+          format: nullable
+        strIngredient6:
+          type: string
+          format: nullable
+        strIngredient7:
+          type: string
+          format: nullable
+        strIngredient8:
+          type: string
+          format: nullable
+        strIngredient9:
+          type: string
+          format: nullable
+        strIngredient10:
+          type: string
+          format: nullable
+        strIngredient11:
+          type: string
+          format: nullable
+        strIngredient12:
+          type: string
+          format: nullable
+        strIngredient13:
+          type: string
+          format: nullable
+        strIngredient14:
+          type: string
+          format: nullable
+        strIngredient15:
+          type: string
+          format: nullable
+        strMeasure1:
+          type: string
+        strMeasure2:
+          type: string
+        strMeasure3:
+          type: string
+        strMeasure4:
+          type: string
+          format: nullable
+        strMeasure5:
+          type: string
+          format: nullable
+        strMeasure6:
+          type: string
+          format: nullable
+        strMeasure7:
+          type: string
+          format: nullable
+        strMeasure8:
+          type: string
+          format: nullable
+        strMeasure9:
+          type: string
+          format: nullable
+        strMeasure10:
+          type: string
+          format: nullable
+        strMeasure11:
+          type: string
+          format: nullable
+        strMeasure12:
+          type: string
+          format: nullable
+        strMeasure13:
+          type: string
+          format: nullable
+        strMeasure14:
+          type: string
+          format: nullable
+        strMeasure15:
+          type: string
+          format: nullable
+        strImageSource:
+          type: string
+        strImageAttribution:
+          type: string
+        strCreativeCommonsConfirmed:
+          type: string
+        dateModified:
+          type: string

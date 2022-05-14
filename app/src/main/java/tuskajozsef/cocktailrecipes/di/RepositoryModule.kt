@@ -25,7 +25,7 @@ object RepositoryModule {
 
     @Provides
     @ViewModelScoped
-    fun provideDetailsRepository(cocktailDao: CocktailDao): DetailRepository {
-        return DetailRepository(cocktailDao)
+    fun provideDetailsRepository(cocktailService: CocktailService): DetailRepository {
+        return DetailRepository(cocktailService)
     }
 }
