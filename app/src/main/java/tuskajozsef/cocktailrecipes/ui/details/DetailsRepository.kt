@@ -1,6 +1,7 @@
 package tuskajozsef.cocktailrecipes.ui.details
 
 import androidx.annotation.WorkerThread
+import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -13,25 +14,13 @@ import tuskajozsef.cocktailrecipes.network.CocktailService
 import tuskajozsef.cocktailrecipes.persistence.CocktailDao
 import javax.inject.Inject
 
-class DetailRepository @Inject constructor(
+class DetailsRepository @Inject constructor(
     private val cocktailService: CocktailService
 ) {
     @WorkerThread
-    fun getCocktailDetails() = flow {
-        var cocktail: Cocktail? = null;
-        cocktailService.getRandomCocktail().enqueue(object : Callback<CocktailResponse> {
-            override fun onFailure(call: Call<CocktailResponse>, t: Throwable) {
-                print(t.message!!)
-            }
-
-            override fun onResponse(
-                call: Call<CocktailResponse>,
-                response: Response<CocktailResponse>
-            ) {
-                val cocktailsResponse = response.body()
-                cocktail = cocktailsResponse!!.drinks[0];
-            }
-        })
-        emit(cocktail)
+    fun getCocktailDetails(name: String) = flow {
+        cocktailService.getCocktailDetails(name).suspendOnSuccess {
+            emit(data.drinks[0])
+        }
     }.flowOn(Dispatchers.IO)
 }

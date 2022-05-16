@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CocktailRecipes</string>
+    <string name="details">Részletek</string>
+    <string name="ingredients">Hozzávalók</string>
 </resources>
