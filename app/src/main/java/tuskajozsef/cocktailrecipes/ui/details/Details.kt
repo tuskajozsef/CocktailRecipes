@@ -26,14 +26,23 @@ class Details : ComponentActivity() {
             .onEach { cocktail -> withContext(Dispatchers.Main){
                 Picasso.get().load(cocktail.strDrinkThumb).into(cocktailImage);
                 cocktailName.text = cocktail.strDrink;
-                ingredient1.text = cocktail.strIngredient1 + ' ' + cocktail.strMeasure1
-                ingredient2.text = cocktail.strIngredient2 + ' ' + cocktail.strMeasure2
-                ingredient3.text = cocktail.strIngredient3 + ' ' + cocktail.strMeasure3
-                ingredient4.text = cocktail.strIngredient4 + ' ' + cocktail.strMeasure4
-                ingredient5.text = cocktail.strIngredient5 + ' ' + cocktail.strMeasure5
-                ingredient6.text = cocktail.strIngredient6 + ' ' + cocktail.strMeasure6
-                ingredient7.text = cocktail.strIngredient7 + ' ' + cocktail.strMeasure7
+                ingredient1.text = getIngredientText(cocktail.strMeasure1, cocktail.strIngredient1)
+                ingredient2.text = getIngredientText(cocktail.strMeasure2, cocktail.strIngredient2)
+                ingredient3.text = getIngredientText(cocktail.strMeasure3, cocktail.strIngredient3)
+                ingredient4.text = getIngredientText(cocktail.strMeasure4, cocktail.strIngredient4)
+                ingredient5.text = getIngredientText(cocktail.strMeasure5, cocktail.strIngredient5)
+                ingredient6.text = getIngredientText(cocktail.strMeasure6, cocktail.strIngredient6)
+                ingredient7.text = getIngredientText(cocktail.strMeasure7, cocktail.strIngredient7)
             } }
             .launchIn(CoroutineScope(Dispatchers.IO))
+    }
+
+    private fun getIngredientText(measure: String?, ingredient: String?): String{
+        return if(measure == null){
+            "";
+        } else{
+            "$measure $ingredient"
+        }
+
     }
 }
