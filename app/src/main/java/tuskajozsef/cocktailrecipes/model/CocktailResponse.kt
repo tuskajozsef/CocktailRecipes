@@ -1,5 +1,5 @@
 package tuskajozsef.cocktailrecipes.model
 
-class CocktailResponse {
+class CocktailResponse(
     var drinks : ArrayList<Cocktail> = arrayListOf()
-}
+)

@@ -7,13 +7,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tuskajozsef.cocktailrecipes.network.CocktailService
-import tuskajozsef.cocktailrecipes.network.MockInterceptor
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -23,18 +20,11 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        @ApplicationContext context: Context,
-        @Named("MockInterceptor") authInterceptor: Interceptor
+        @ApplicationContext context: Context
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(authInterceptor)
             .build()
     }
-
-    @Provides
-    @Singleton
-    @Named("MockInterceptor")
-    fun provideMockInterceptor(): Interceptor = MockInterceptor()
 
     @Provides
     @Singleton
