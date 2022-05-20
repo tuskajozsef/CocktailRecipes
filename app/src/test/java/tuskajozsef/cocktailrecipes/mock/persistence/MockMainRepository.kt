@@ -1,18 +1,17 @@
-package tuskajozsef.cocktailrecipes.ui.main
+package tuskajozsef.cocktailrecipes.mock.persistence
 
 import androidx.annotation.WorkerThread
+import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
-import tuskajozsef.cocktailrecipes.model.Cocktail
-import tuskajozsef.cocktailrecipes.network.CocktailService
-import tuskajozsef.cocktailrecipes.persistence.CocktailDao
-import javax.inject.Inject
-import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.flow.flowOn
+import tuskajozsef.cocktailrecipes.mock.network.MockService
+import tuskajozsef.cocktailrecipes.model.Cocktail
+import javax.inject.Inject
 
-class MainRepository @Inject constructor(
-    private val cocktailService: CocktailService,
-    private val cocktailDao: CocktailDao
+class MockMainRepository @Inject constructor(
+    private val cocktailService: MockService,
+    private val cocktailDao: MockCocktailDao
 ) {
     @WorkerThread
     fun getAllCocktails(reset: Boolean) = flow {

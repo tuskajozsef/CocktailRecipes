@@ -11,7 +11,9 @@ import tuskajozsef.cocktailrecipes.network.CocktailService
 
 class MockService : CocktailService {
     override suspend fun getCocktailDetails(cocktailName: String): ApiResponse<CocktailResponse> {
-        TODO("Not yet implemented")
+        return ApiResponse.of {
+            Response.success(mockCocktailResponse)
+        }
     }
 
     override suspend fun getCocktailsByIngredient(ingredient: String): ApiResponse<CocktailResponse> {

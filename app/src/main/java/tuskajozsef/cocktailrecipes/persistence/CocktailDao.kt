@@ -11,8 +11,8 @@ interface CocktailDao {
     @Insert
     suspend fun insertCocktail(cocktail: Cocktail) : Long
 
-    @Delete
-    suspend fun deleteCocktail(cocktail: Cocktail)
+    @Query("DELETE FROM cocktails")
+    suspend fun deleteCocktails()
 
     @Update
     suspend fun updateCocktail(cocktail: Cocktail)

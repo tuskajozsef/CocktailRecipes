@@ -8,8 +8,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    mainRepository: MainRepository
+    var mainRepository: MainRepository
 ) : ViewModel() {
 
-    var cocktailList: Flow<MutableList<Cocktail>> = mainRepository.getAllCocktails();
+    fun cocktailList(reset: Boolean): Flow<MutableList<Cocktail>> = mainRepository.getAllCocktails(reset);
+    fun cocktailsByIngredient(ingredient: String): Flow<List<Cocktail>> = mainRepository.getCocktailsByIngredient(ingredient)
 }

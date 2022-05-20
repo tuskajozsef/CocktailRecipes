@@ -1,6 +1,7 @@
 package tuskajozsef.cocktailrecipes.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import tuskajozsef.cocktailrecipes.R
@@ -29,10 +30,29 @@ class MainActivity : ComponentActivity() {
         recyclerView.layoutManager = LinearLayoutManager(baseContext);
         recyclerView.adapter = adapter;
 
-        viewModel.cocktailList
+        viewModel.cocktailList(false)
             .onEach { list -> withContext(Dispatchers.Main){
                 adapter.updateDataSet(list.toTypedArray())
             } }
             .launchIn(CoroutineScope(Dispatchers.IO))
+
+        searchButton.setOnClickListener{
+            val ingredient = searchCocktailIngredient.text?.toString()
+
+            if(ingredient != null)
+                viewModel.cocktailsByIngredient(ingredient)
+                    .onEach { list -> withContext(Dispatchers.Main){
+                        adapter.updateDataSet(list.toTypedArray())
+                    } }
+                    .launchIn(CoroutineScope(Dispatchers.IO))
+        }
+
+        refreshButton.setOnClickListener{
+            viewModel.cocktailList(true)
+                .onEach { list -> withContext(Dispatchers.Main){
+                    adapter.updateDataSet(list.toTypedArray())
+                } }
+                .launchIn(CoroutineScope(Dispatchers.IO))
+        }
     }
 }
