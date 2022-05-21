@@ -37,6 +37,14 @@ android {
 apply from: '../dependencies.gradle'
 
 dependencies {
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:30.0.2')
+
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     implementation 'com.squareup.picasso:picasso:2.8'
 
     // material
@@ -110,3 +118,9 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$versions.androidxTestJunit"
     androidTestImplementation "com.android.support.test:runner:$versions.androidTestRunner"
 }
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services' // Google services Gradle plugin
+
+// Apply the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'

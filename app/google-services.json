@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "859611217507",
+    "project_id": "moblab-f452d",
+    "storage_bucket": "moblab-f452d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859611217507:android:291dbb75b3a6199c968256",
+        "android_client_info": {
+          "package_name": "tuskajozsef.cocktailrecipes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859611217507-ii773cilv1gdp4cqpc3jafdqrmrft5m5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDffZDxt9YS6whxGeig2Rm_-_ma7avOBV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859611217507-ii773cilv1gdp4cqpc3jafdqrmrft5m5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
